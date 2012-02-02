@@ -1,12 +1,12 @@
 {
   "name": "native",
   "fullName": "Native-like",
-  "version": "0.0.1",
+  "version": "0.5.0",
   "description": "App looking native on iPhone and android",
   "joshfire": {
     "images": {
-      "small": "http://i.imgur.com/sm0MA.png",
-      "big": "http://i.imgur.com/x5NbC.png"
+      "small": "http://dl.dropbox.com/u/1351363/factory/small.png",
+      "big": "http://dl.dropbox.com/u/1351363/factory/big.png"
     },
     "datasources": {
       "news": {
