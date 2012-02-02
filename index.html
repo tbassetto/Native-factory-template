@@ -6,7 +6,7 @@
     <link href="styles/kendo.mobile.all.min.css" rel="stylesheet">
     <script src="js/jquery.min.js"></script>
     <script src="js/kendo.mobile.min.js"></script>
-    <script data-joshfire-bootstrap src="http://factory.joshfire.com/bootstrap/4f2a8e79b09edd01000048b1/4f2a8e8fb09edd0100004af5/phone/"></script>
+    <script data-joshfire-bootstrap></script>
     <script>
       var f = Joshfire.factory,
           news = f.getDataSource('news'),
@@ -14,6 +14,36 @@
 
       document.title = f.config.app.name;
     </script>
+    <style>
+      .photo {
+        width: 277px;
+        margin: 20px 20px 7px;
+        height: 220px;
+        display: inline-block;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+      .photo1 {background-image: url("../../content/mobile/cities/220/sydney.jpg");}
+      .photo2 {background-image: url("../../content/mobile/cities/220/bonn.jpg");}
+      .photo3 {background-image: url("../../content/mobile/cities/220/boston.jpg");}
+      .photo4 {background-image: url("../../content/mobile/cities/220/cairo.jpg");}
+      .photo5 {background-image: url("../../content/mobile/cities/220/cancun.jpg");}
+      .photo6 {background-image: url("../../content/mobile/cities/220/cape-town.jpg");}
+      .photo7 {background-image: url("../../content/mobile/cities/220/liverpool.jpg");}
+      .photo8 {background-image: url("../../content/mobile/cities/220/london.jpg");}
+      .photo9 {background-image: url("../../content/mobile/cities/220/melbourne.jpg");}
+      .photo10 {background-image: url("../../content/mobile/cities/220/san-francisco.jpg");}
+
+      #scrollview-container {
+        margin: 3px 0 1em 0;
+        padding-bottom: 10px;
+        background: rgba(0,0,0,.1);
+        border: 1px solid rgba(0,0,0,.3);
+        border-width: 1px 0;
+        box-shadow: 0 1px 1px rgba(255,255,255,.3);
+      }
+    </style>
   </head>
   <body>
     <div data-role="view" id="news" data-layout="phone-app" data-init="populateNewsList">
@@ -21,14 +51,14 @@
     </div>
 
     <div data-role="view" id="photos" data-layout="phone-app" data-init="populatePhotosList">
-      <ul id="photos-listview"></ul>
+      <div id="scrollview-container">
+        <div id="scrollview-content"></div>
+    </div>
     </div>
 
     <div data-role="layout" data-id="phone-app">
       <header data-role="header">
-        <div data-role="navbar" id="title">
-          {AppTitle}
-        </div>
+        <div data-role="navbar" id="title"></div>
       </header>
 
       <div data-role="footer">
@@ -41,14 +71,11 @@
     <script>
       $(function() {
         document.getElementById('title').innerHTML = f.config.app.name;
+        // $('.km-content').addClass('loading');
       });
 
       function populateNewsList() {
-        news.find({
-          limit: 10,
-          skip: 40
-        },
-        function (err, data) {
+        news.find({}, function (err, data) {
           if (err) alert(err);
 
           // Process data entries in data.entries
@@ -60,26 +87,24 @@
           });
 
           $('#news-listview').kendoMobileListView({dataSource: data});
+          // $('.km-content').removeClass('loading');
         });
       }
 
       function populatePhotosList() {
-        photos.find({
-          limit: 10,
-          skip: 40
-        },
-        function (err, data) {
+        photos.find({}, function (err, data) {
           if (err) alert(err);
 
           // Process data entries in data.entries
           var photoList = data.entries
-            , data = [];
+            , $scrollviewContent = $('#scrollview-content');
 
-          photoList.map(function (photo, idx) {
-            data.push(photo.name)
-          });
+          for (var i = 0, l = photoList.length; i < l; i++) {
+            $scrollviewContent.append('<div class="photo" style="background-image:url(' + photoList[i].thumbnail[3].contentURL + ')"></div>');
+          }
 
-          $('#photos-listview').kendoMobileListView({dataSource: data});
+          $('#scrollview-content').kendoMobileScrollView();
+          // $('.km-content').removeClass('loading');
         });
       }
     </script>
