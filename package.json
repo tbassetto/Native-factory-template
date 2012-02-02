@@ -13,7 +13,7 @@
         "title": "Articles",
         "description": "Datasource with text"
       },
-      "photo": {
+      "photos": {
         "title": "Photos",
         "description": "Pretty please"
       }
