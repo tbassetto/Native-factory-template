@@ -1,0 +1,23 @@
+{
+  "name": "native",
+  "fullName": "Native-like",
+  "version": "0.0.1",
+  "description": "App looking native on iPhone and android",
+  "joshfire": {
+    "images": {
+      "small": "http://i.imgur.com/sm0MA.png",
+      "big": "http://i.imgur.com/x5NbC.png"
+    },
+    "datasources": {
+      "news": {
+        "title": "Articles",
+        "description": "Datasource with text"
+      },
+      "photo": {
+        "title": "Photos",
+        "description": "Pretty please"
+      }
+    },
+    "devices": ["phone"]
+  }
+}
